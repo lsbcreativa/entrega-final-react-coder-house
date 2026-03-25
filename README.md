@@ -107,10 +107,10 @@ El proyecto utiliza **Firebase Firestore** con dos colecciones:
 
 ## 📝 Curso
 
-**Entrega Final** — React JS | [Coder House](https://www.coderhouse.com/)
+**Entrega Final** — React JS | Coder House
 
 ---
 
 ## 👤 Autor
 
-**Andrés Botta** — [andresbotta.dev](https://andresbotta.dev)
+**Andrés Sánchez Botta** — [andresbotta.dev](https://andresbotta.dev)
