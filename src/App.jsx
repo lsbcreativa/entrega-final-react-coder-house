@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom"
 import { useEffect } from "react"
 import { CartProvider } from "./context/CartContext"
 import NavBar from "./components/NavBar/NavBar"
@@ -27,7 +27,7 @@ const ScrollToTop = () => {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <CartProvider>
         <ScrollToTop />
         <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
@@ -102,7 +102,7 @@ function App() {
           </Box>
         </Box>
       </CartProvider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
