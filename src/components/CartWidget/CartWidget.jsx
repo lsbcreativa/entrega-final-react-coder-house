@@ -7,11 +7,9 @@ import { useCart } from "../../context/CartContext"
 const CartWidget = () => {
   const { totalQuantity } = useCart()
 
-  if (totalQuantity === 0) return null
-
   return (
     <IconButton component={Link} to="/cart" sx={{ color: "primary.main" }}>
-      <Badge badgeContent={totalQuantity} color="primary" overlap="rectangular">
+      <Badge badgeContent={totalQuantity || 0} color="primary" overlap="rectangular" showZero={false}>
         <ShoppingBagOutlinedIcon />
       </Badge>
     </IconButton>
