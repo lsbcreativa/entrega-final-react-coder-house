@@ -93,9 +93,16 @@ function App() {
                 </Grid>
               </Grid>
               <Divider sx={{ borderColor: "rgba(255,255,255,0.03)" }} />
-              <Box sx={{ py: 2.5, textAlign: "center" }}>
+              <Box sx={{ py: 2.5, textAlign: "center", display: "flex", flexDirection: "column", gap: 0.5 }}>
                 <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.15)", letterSpacing: 1 }}>
                   © 2026 House of Prinie. Todos los derechos reservados.
+                </Typography>
+                <Typography variant="caption" sx={{ color: "rgba(198,165,92,0.35)", letterSpacing: 0.5 }}>
+                  Hecho por{" "}
+                  <Box component="a" href="https://andresbotta.dev" target="_blank" rel="noopener noreferrer" sx={{ color: "rgba(198,165,92,0.6)", textDecoration: "none", "&:hover": { color: "primary.main" } }}>
+                    AndresBottaDev
+                  </Box>
+                  {" "}· Entrega final del curso React JS — Coder House
                 </Typography>
               </Box>
             </Container>

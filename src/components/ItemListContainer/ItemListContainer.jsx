@@ -32,6 +32,12 @@ const ItemListContainer = () => {
   }, [categoryId])
 
   const categoryNames = { alimentos: "Alimentos", juguetes: "Juguetes", accesorios: "Accesorios", higiene: "Higiene" }
+  const categoryDescriptions = {
+    alimentos: "Nutrición premium para perros y gatos. Alimentos balanceados, snacks y dietas especiales para cada etapa de vida.",
+    juguetes: "Diversión garantizada para tu mascota. Juguetes interactivos, peluches y accesorios de entretenimiento.",
+    accesorios: "Comodidad y estilo para tu compañero. Camas, collares, transportadoras y todo lo que necesita.",
+    higiene: "Cuidado profesional en casa. Shampoos, cepillos, cortaúñas y productos de limpieza para tu mascota.",
+  }
 
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 3, md: 5 } }}>
@@ -47,7 +53,7 @@ const ItemListContainer = () => {
               Bienvenido a{" "}<Box component="span" sx={{ color: gold }}>House of Prinie</Box>
             </Typography>
             <Typography sx={{ color: "rgba(255,255,255,0.4)", fontSize: { xs: "0.95rem", md: "1.1rem" }, lineHeight: 1.8, mb: 4, maxWidth: 500 }}>
-              Productos premium seleccionados para tu compañero. Porque se merece lo mejor.
+              Descubrí nuestra colección exclusiva de productos premium para tu mascota. Alimentos de primera calidad, juguetes innovadores, accesorios de diseño y productos de higiene profesional. Porque tu compañero merece lo mejor.
             </Typography>
             <Box sx={{ display: "flex", gap: 1.5, flexWrap: "wrap" }}>
               {[
@@ -72,6 +78,12 @@ const ItemListContainer = () => {
         </Typography>
         <Typography variant="h4" sx={{ fontWeight: 800, letterSpacing: "0.5px" }}>
           {categoryId ? categoryNames[categoryId] || categoryId : "Todos los Productos"}
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ mt: 1, maxWidth: 600, mx: "auto" }}>
+          {categoryId
+            ? categoryDescriptions[categoryId] || `Explorá nuestra selección de ${categoryNames[categoryId]?.toLowerCase()}`
+            : "Explorá nuestro catálogo completo de productos seleccionados para el bienestar de tu mascota."
+          }
         </Typography>
       </Box>
 
