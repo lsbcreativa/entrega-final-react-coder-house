@@ -1,6 +1,11 @@
+// seedProducts.js — Script para cargar los productos iniciales a Firebase Firestore
+// Se ejecuta una sola vez con: node --experimental-modules src/scripts/seedProducts.js
+// Primero elimina todos los productos existentes y luego sube los nuevos
+
 import { initializeApp } from "firebase/app"
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore"
 
+// Configuración de Firebase (misma que en la app)
 const firebaseConfig = {
   apiKey: "AIzaSyDRDUH_vV3YMdmMukgSRssl_hOxHj1y7qQ",
   authDomain: "house-of-prinie.firebaseapp.com",
@@ -13,11 +18,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
+// URLs base para las imágenes de Pexels (servicio de imágenes gratuitas)
 const P = "https://images.pexels.com/photos"
 const Q = "?auto=compress&cs=tinysrgb&w=600"
 
+// Array con todos los productos de la tienda
+// Cada producto tiene: nombre, precio (en soles), categoría, descripción, imagen y stock
 const products = [
-  // ALIMENTOS
+  // ==================== ALIMENTOS ====================
   {
     name: "Alimento Premium Perro Adulto 15kg",
     price: 199.90,
@@ -51,7 +59,7 @@ const products = [
     stock: 15
   },
 
-  // JUGUETES
+  // ==================== JUGUETES ====================
   {
     name: "Pelota Interactiva con Sonido",
     price: 32.90,
@@ -85,7 +93,7 @@ const products = [
     stock: 12
   },
 
-  // ACCESORIOS
+  // ==================== ACCESORIOS ====================
   {
     name: "Cama Ortopédica para Perro Grande",
     price: 169.90,
@@ -119,7 +127,7 @@ const products = [
     stock: 6
   },
 
-  // HIGIENE
+  // ==================== HIGIENE ====================
   {
     name: "Shampoo Hipoalergénico 500ml",
     price: 36.90,
@@ -142,7 +150,7 @@ const products = [
     category: "higiene",
     description: "Cortaúñas de acero inoxidable con mango ergonómico antideslizante y protector de seguridad. Incluye lima para acabado suave. Apto para perros y gatos.",
     img: `${P}/1254140/pexels-photo-1254140.jpeg${Q}`,
-    stock: 0
+    stock: 0  // Sin stock — para demostrar el renderizado condicional de "Agotado"
   },
   {
     name: "Toallitas Húmedas Desodorizantes x80",
@@ -154,7 +162,9 @@ const products = [
   }
 ]
 
+// Función principal que ejecuta el seed
 async function seedProducts() {
+  // Paso 1: Eliminar todos los productos existentes en Firestore
   console.log("🗑️  Eliminando productos anteriores...")
   const productsRef = collection(db, "products")
   const snapshot = await getDocs(productsRef)
@@ -162,6 +172,7 @@ async function seedProducts() {
     await deleteDoc(doc(db, "products", docSnap.id))
   }
 
+  // Paso 2: Subir cada producto nuevo a Firestore
   console.log(`\n🐾 Subiendo ${products.length} productos (Soles)...`)
   for (const product of products) {
     try {
@@ -176,4 +187,5 @@ async function seedProducts() {
   process.exit(0)
 }
 
+// Ejecutar el seed
 seedProducts()

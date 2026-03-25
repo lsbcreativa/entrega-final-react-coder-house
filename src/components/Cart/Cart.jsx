@@ -1,3 +1,6 @@
+// Cart — Vista del carrito de compras
+// Muestra todos los productos agregados, permite eliminarlos y proceder al checkout
+// Si el carrito está vacío, muestra un mensaje con un botón para volver al catálogo
 import { Link } from "react-router-dom"
 import { useCart } from "../../context/CartContext"
 import Container from "@mui/material/Container"
@@ -14,13 +17,16 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart"
 
+// Imagen de respaldo y función para formatear precios en soles
 const PLACEHOLDER = "https://placehold.co/200x200/1a1a1a/C6A55C?text=🐾"
 const fmt = (n) => `S/ ${n.toLocaleString("es-PE", { minimumFractionDigits: 2 })}`
 
 const Cart = () => {
+  // Obtenemos el carrito y sus funciones del contexto global
   const { cart, removeItem, clear, totalPrice, totalQuantity } = useCart()
   const handleImgError = (e) => { e.target.onerror = null; e.target.src = PLACEHOLDER }
 
+  // Renderizado condicional: si el carrito está vacío, mostramos mensaje especial
   if (totalQuantity === 0) {
     return (
       <Container maxWidth="lg" sx={{ py: 4 }}>
@@ -40,17 +46,21 @@ const Cart = () => {
       <Typography variant="h4" fontWeight={800} gutterBottom>Tu Carrito</Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>{totalQuantity} {totalQuantity === 1 ? "producto" : "productos"}</Typography>
 
+      {/* Layout en 2 columnas: lista de productos a la izquierda, resumen a la derecha */}
       <Grid container spacing={3}>
+        {/* Columna izquierda — Lista de productos en el carrito */}
         <Grid size={{ xs: 12, md: 8 }}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
             {cart.map(item => (
               <Paper key={item.id} variant="outlined" sx={{ p: 2, display: "flex", alignItems: "center", gap: 2, transition: "0.3s", borderColor: "rgba(255,255,255,0.04)", "&:hover": { borderColor: "rgba(198,165,92,0.2)" } }}>
+                {/* Miniatura del producto */}
                 <Avatar variant="rounded" src={item.img || PLACEHOLDER} alt={item.name} imgProps={{ onError: handleImgError }} sx={{ width: 80, height: 80, borderRadius: 2 }} />
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="body1" fontWeight={600} sx={{ color: "rgba(255,255,255,0.85)" }}>{item.name}</Typography>
                   <Typography variant="body2" color="text.secondary">Cantidad: {item.quantity}</Typography>
                   <Typography sx={{ fontWeight: 700, color: "primary.main", mt: 0.25 }}>{fmt(item.price * item.quantity)}</Typography>
                 </Box>
+                {/* Botón para eliminar este producto del carrito */}
                 <IconButton onClick={() => removeItem(item.id)} sx={{ color: "error.main", border: "1px solid rgba(248,113,113,0.2)", "&:hover": { bgcolor: "error.main", color: "#fff" } }}>
                   <DeleteOutlineIcon fontSize="small" />
                 </IconButton>
@@ -59,10 +69,12 @@ const Cart = () => {
           </Box>
         </Grid>
 
+        {/* Columna derecha — Resumen del pedido (sticky en desktop) */}
         <Grid size={{ xs: 12, md: 4 }}>
           <Paper elevation={0} sx={{ p: 3, borderRadius: 3, border: "1px solid rgba(198,165,92,0.12)", position: { md: "sticky" }, top: { md: 92 } }}>
             <Typography variant="overline" sx={{ color: "primary.main", fontSize: "0.65rem" }}>RESUMEN DEL PEDIDO</Typography>
             <Divider sx={{ my: 1.5, borderColor: "rgba(198,165,92,0.08)" }} />
+            {/* Desglose de cada producto con su subtotal */}
             {cart.map(item => (
               <Box key={item.id} sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
                 <Typography variant="body2" color="text.secondary" sx={{ maxWidth: "55%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.name} x{item.quantity}</Typography>
@@ -70,11 +82,14 @@ const Cart = () => {
               </Box>
             ))}
             <Divider sx={{ my: 2, borderColor: "rgba(198,165,92,0.08)" }} />
+            {/* Total general */}
             <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
               <Typography variant="h6" fontWeight={600}>Total</Typography>
               <Typography variant="h6" fontWeight={800} color="primary.main">{fmt(totalPrice)}</Typography>
             </Box>
+            {/* Botón para ir al checkout */}
             <Button variant="contained" color="primary" fullWidth size="large" component={Link} to="/checkout" sx={{ mb: 1.5, py: 1.5 }}>Finalizar compra</Button>
+            {/* Botón para vaciar todo el carrito */}
             <Button variant="outlined" color="inherit" fullWidth startIcon={<RemoveShoppingCartIcon />} onClick={clear} sx={{ color: "text.secondary", borderColor: "rgba(255,255,255,0.08)" }}>Vaciar carrito</Button>
           </Paper>
         </Grid>

@@ -1,3 +1,6 @@
+// NavBar — Barra de navegación principal
+// Contiene el logo, los links de categorías y el widget del carrito
+// En mobile se transforma en un menú lateral (Drawer)
 import { useState } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
 import { useEffect } from "react"
@@ -19,6 +22,7 @@ import CloseIcon from "@mui/icons-material/Close"
 import PetsIcon from "@mui/icons-material/Pets"
 import CartWidget from "../CartWidget/CartWidget"
 
+// Definición de las categorías del navbar — cada una con su ruta
 const categories = [
   { label: "Inicio", path: "/", end: true },
   { label: "Alimentos", path: "/category/alimentos" },
@@ -28,15 +32,19 @@ const categories = [
 ]
 
 const NavBar = () => {
+  // Estado para controlar si el menú lateral (mobile) está abierto o cerrado
   const [drawerOpen, setDrawerOpen] = useState(false)
   const { pathname } = useLocation()
 
+  // Cerrar el drawer automáticamente al cambiar de ruta
   useEffect(() => { setDrawerOpen(false) }, [pathname])
 
   return (
+    // AppBar sticky — se mantiene fijo al hacer scroll
     <AppBar position="sticky" elevation={0}>
       <Container maxWidth="lg">
         <Toolbar disableGutters sx={{ height: 76, justifyContent: "space-between" }}>
+          {/* Logo — al hacer clic lleva al inicio */}
           <Box component={Link} to="/" sx={{ display: "flex", alignItems: "center", gap: 1.5, textDecoration: "none", color: "white" }}>
             <PetsIcon sx={{ fontSize: 30, color: "primary.main" }} />
             <Box>
@@ -49,6 +57,8 @@ const NavBar = () => {
             </Box>
           </Box>
 
+          {/* Navegación desktop — se oculta en mobile (xs) */}
+          {/* NavLink marca automáticamente la clase "active" en la categoría actual */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 0.5, alignItems: "center" }}>
             {categories.map(cat => (
               <Button key={cat.path} component={NavLink} to={cat.path} end={cat.end}
@@ -61,6 +71,7 @@ const NavBar = () => {
             ))}
           </Box>
 
+          {/* Carrito + botón hamburguesa (solo en mobile) */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <CartWidget />
             <IconButton sx={{ display: { md: "none" }, color: "primary.main" }} onClick={() => setDrawerOpen(true)}>
@@ -70,6 +81,7 @@ const NavBar = () => {
         </Toolbar>
       </Container>
 
+      {/* Drawer — menú lateral para dispositivos móviles */}
       <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)} PaperProps={{ sx: { width: 280, bgcolor: "#111" } }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", p: 2.5 }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -79,6 +91,7 @@ const NavBar = () => {
           <IconButton onClick={() => setDrawerOpen(false)} sx={{ color: "text.secondary" }}><CloseIcon /></IconButton>
         </Box>
         <Divider sx={{ borderColor: "rgba(198,165,92,0.1)" }} />
+        {/* Lista de categorías en el drawer */}
         <List sx={{ px: 1, pt: 1 }}>
           {categories.map(cat => (
             <ListItem key={cat.path} disablePadding>

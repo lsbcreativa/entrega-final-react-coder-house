@@ -1,5 +1,8 @@
+// Configuración del tema personalizado de Material UI
+// Define la paleta de colores, tipografía y estilos globales de la app
 import { createTheme } from '@mui/material/styles'
 
+// Paleta de colores — estilo luxury pet boutique (dorados sobre fondo oscuro)
 const gold = '#C6A55C'
 const goldLight = '#D4AF37'
 const goldDark = '#A8893D'
@@ -8,8 +11,10 @@ const darkPaper = '#161616'
 const darkCard = '#1A1A1A'
 
 const theme = createTheme({
+  // Modo oscuro como base
   palette: {
     mode: 'dark',
+    // Color primario — dorado para botones, textos destacados y acentos
     primary: {
       main: gold,
       light: goldLight,
@@ -22,6 +27,7 @@ const theme = createTheme({
       dark: goldDark,
       contrastText: '#0D0D0D',
     },
+    // Fondos oscuros para el cuerpo y las superficies (cards, papers)
     background: {
       default: darkBg,
       paper: darkPaper,
@@ -35,6 +41,7 @@ const theme = createTheme({
     error: { main: '#F87171' },
     warning: { main: goldLight },
   },
+  // Tipografía — fuente Poppins con pesos variables para jerarquía visual
   typography: {
     fontFamily: '"Poppins", "Helvetica Neue", Arial, sans-serif',
     h1: { fontWeight: 800, letterSpacing: '1px' },
@@ -46,10 +53,13 @@ const theme = createTheme({
     overline: { fontWeight: 700, letterSpacing: '3px' },
     button: { textTransform: 'none', fontWeight: 600, letterSpacing: '0.5px' },
   },
+  // Bordes redondeados globales
   shape: {
     borderRadius: 12,
   },
+  // Personalización de componentes MUI individuales
   components: {
+    // Estilos base del body — fondo oscuro y scrollbar personalizado
     MuiCssBaseline: {
       styleOverrides: {
         body: {
@@ -60,6 +70,7 @@ const theme = createTheme({
         },
       },
     },
+    // Botones — gradientes dorados con efecto hover elevado
     MuiButton: {
       styleOverrides: {
         root: {
@@ -98,6 +109,7 @@ const theme = createTheme({
         },
       },
     },
+    // Cards — fondo oscuro con borde sutil y efecto hover con elevación
     MuiCard: {
       styleOverrides: {
         root: {
@@ -114,6 +126,7 @@ const theme = createTheme({
         },
       },
     },
+    // Paper — sin imagen de fondo por defecto
     MuiPaper: {
       styleOverrides: {
         root: {
@@ -125,6 +138,7 @@ const theme = createTheme({
         },
       },
     },
+    // AppBar — fondo semi-transparente con efecto blur (glassmorphism)
     MuiAppBar: {
       styleOverrides: {
         root: {
@@ -134,6 +148,7 @@ const theme = createTheme({
         },
       },
     },
+    // TextFields — borde dorado al enfocar
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -149,6 +164,7 @@ const theme = createTheme({
         },
       },
     },
+    // Chips — badges pequeños para categorías y etiquetas
     MuiChip: {
       styleOverrides: {
         root: {
@@ -158,6 +174,7 @@ const theme = createTheme({
         },
       },
     },
+    // Alertas — estilo dorado para notificaciones de éxito e información
     MuiAlert: {
       styleOverrides: {
         filledSuccess: {
@@ -172,6 +189,7 @@ const theme = createTheme({
         },
       },
     },
+    // Spinner de carga — color dorado
     MuiCircularProgress: {
       styleOverrides: {
         root: {
@@ -179,6 +197,7 @@ const theme = createTheme({
         },
       },
     },
+    // Badge del carrito — fondo dorado con texto oscuro
     MuiBadge: {
       styleOverrides: {
         badge: {

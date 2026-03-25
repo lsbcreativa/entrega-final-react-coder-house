@@ -1,3 +1,6 @@
+// ItemListContainer — Contenedor principal del catálogo de productos
+// Se encarga de obtener los productos desde Firestore y pasarlos a ItemList
+// Si hay un categoryId en la URL, filtra por esa categoría
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { collection, getDocs, query, where } from "firebase/firestore"
@@ -17,10 +20,15 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined"
 const gold = "#C6A55C"
 
 const ItemListContainer = () => {
+  // Estado para almacenar los productos obtenidos de Firestore
   const [products, setProducts] = useState([])
+  // Estado de carga — muestra un spinner mientras se obtienen los datos
   const [loading, setLoading] = useState(true)
+  // Parámetro de la URL — si existe, filtramos por categoría
   const { categoryId } = useParams()
 
+  // useEffect se ejecuta cada vez que cambia la categoría
+  // Consultamos Firestore: si hay categoría, usamos where() para filtrar
   useEffect(() => {
     setLoading(true)
     const productsRef = collection(db, "products")
@@ -31,7 +39,9 @@ const ItemListContainer = () => {
       .finally(() => setLoading(false))
   }, [categoryId])
 
+  // Mapeo de IDs de categoría a nombres legibles en español
   const categoryNames = { alimentos: "Alimentos", juguetes: "Juguetes", accesorios: "Accesorios", higiene: "Higiene" }
+  // Descripciones para cada categoría — se muestran debajo del título
   const categoryDescriptions = {
     alimentos: "Nutrición premium para perros y gatos. Alimentos balanceados, snacks y dietas especiales para cada etapa de vida.",
     juguetes: "Diversión garantizada para tu mascota. Juguetes interactivos, peluches y accesorios de entretenimiento.",
@@ -41,7 +51,7 @@ const ItemListContainer = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 3, md: 5 } }}>
-      {/* Hero — solo en home */}
+      {/* Hero — solo se muestra en la página principal (sin filtro de categoría) */}
       {!categoryId && (
         <Box sx={{
           background: "linear-gradient(135deg, #0D0D0D 0%, #1a1712 40%, #1c1610 100%)",
@@ -55,12 +65,12 @@ const ItemListContainer = () => {
           alignItems: "center",
           border: `1px solid rgba(198,165,92,0.1)`,
         }}>
-          {/* Decorative background elements */}
+          {/* Elementos decorativos — círculos con gradiente dorado de fondo */}
           <Box sx={{ position: "absolute", top: "-20%", right: "10%", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(198,165,92,0.1), transparent 60%)" }} />
           <Box sx={{ position: "absolute", bottom: "-30%", left: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle, rgba(198,165,92,0.06), transparent 60%)" }} />
           <Box sx={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(90deg, transparent, ${gold}40, transparent)` }} />
 
-          {/* Decorative paw on right — desktop */}
+          {/* Icono decorativo de patita — solo visible en desktop */}
           <Box sx={{ display: { xs: "none", md: "flex" }, position: "absolute", right: 60, top: "50%", transform: "translateY(-50%)", alignItems: "center", justifyContent: "center" }}>
             <Box sx={{ width: 220, height: 220, borderRadius: "50%", border: `1px solid rgba(198,165,92,0.08)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <Box sx={{ width: 160, height: 160, borderRadius: "50%", border: `1px dashed rgba(198,165,92,0.06)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -69,7 +79,7 @@ const ItemListContainer = () => {
             </Box>
           </Box>
 
-          {/* Content */}
+          {/* Contenido del Hero — título, descripción y badges informativos */}
           <Box sx={{ position: "relative", zIndex: 2, maxWidth: 600 }}>
             <Typography variant="overline" sx={{ color: gold, fontSize: "0.7rem", mb: 2, display: "block" }}>
               BOUTIQUE PREMIUM PARA MASCOTAS
@@ -81,6 +91,7 @@ const ItemListContainer = () => {
             <Typography sx={{ color: "rgba(255,255,255,0.4)", fontSize: { xs: "0.95rem", md: "1.1rem" }, lineHeight: 1.8, mb: 4, maxWidth: 500 }}>
               Descubre nuestra colección exclusiva de productos premium para tu mascota. Alimentos de primera calidad, juguetes innovadores, accesorios de diseño y productos de higiene profesional. Porque tu compañero merece lo mejor.
             </Typography>
+            {/* Chips informativos — envío gratis, calidad premium, certificados */}
             <Box sx={{ display: "flex", gap: 1.5, flexWrap: "wrap" }}>
               {[
                 { icon: <LocalShippingOutlinedIcon sx={{ fontSize: 16 }} />, text: "Envío gratis" },
@@ -95,7 +106,7 @@ const ItemListContainer = () => {
         </Box>
       )}
 
-      {/* Section header */}
+      {/* Título de la sección — cambia según si estamos viendo todo o una categoría */}
       <Box sx={{ textAlign: "center", mb: 5 }}>
         <Typography variant="overline" sx={{ color: gold, fontSize: "0.7rem", display: "block", mb: 1 }}>
           {categoryId ? "COLECCIÓN" : "NUESTROS PRODUCTOS"}
@@ -111,7 +122,7 @@ const ItemListContainer = () => {
         </Typography>
       </Box>
 
-      {/* Products */}
+      {/* Renderizado condicional: loading → spinner, sin productos → mensaje vacío, con productos → grilla */}
       {loading ? <Loader /> : products.length === 0 ? (
         <Box sx={{ textAlign: "center", py: 10 }}>
           <Inventory2OutlinedIcon sx={{ fontSize: 64, color: "text.secondary", opacity: 0.3, mb: 2 }} />
