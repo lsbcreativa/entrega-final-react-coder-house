@@ -20,11 +20,11 @@ import PetsIcon from "@mui/icons-material/Pets"
 import CartWidget from "../CartWidget/CartWidget"
 
 const categories = [
-  { label: "Home", path: "/", end: true },
-  { label: "Food", path: "/category/alimentos" },
-  { label: "Toys", path: "/category/juguetes" },
-  { label: "Accessories", path: "/category/accesorios" },
-  { label: "Grooming", path: "/category/higiene" },
+  { label: "Inicio", path: "/", end: true },
+  { label: "Alimentos", path: "/category/alimentos" },
+  { label: "Juguetes", path: "/category/juguetes" },
+  { label: "Accesorios", path: "/category/accesorios" },
+  { label: "Higiene", path: "/category/higiene" },
 ]
 
 const NavBar = () => {
@@ -44,35 +44,18 @@ const NavBar = () => {
                 HOUSE OF PRINIE
               </Typography>
               <Typography variant="caption" sx={{ color: "primary.main", fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", fontSize: "0.55rem" }}>
-                Luxury Pet Boutique
+                Boutique Premium para Mascotas
               </Typography>
             </Box>
           </Box>
 
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 0.5, alignItems: "center" }}>
             {categories.map(cat => (
-              <Button
-                key={cat.path}
-                component={NavLink}
-                to={cat.path}
-                end={cat.end}
-                sx={{
-                  color: "rgba(255,255,255,0.5)",
-                  fontSize: "0.82rem",
-                  px: 2,
-                  py: 1,
-                  letterSpacing: "0.5px",
-                  borderRadius: 2,
-                  "&.active": {
-                    color: "primary.main",
-                    bgcolor: "rgba(198,165,92,0.08)",
-                  },
-                  "&:hover": {
-                    color: "primary.main",
-                    bgcolor: "rgba(198,165,92,0.05)",
-                  },
-                }}
-              >
+              <Button key={cat.path} component={NavLink} to={cat.path} end={cat.end}
+                sx={{ color: "rgba(255,255,255,0.5)", fontSize: "0.82rem", px: 2, py: 1, letterSpacing: "0.5px", borderRadius: 2,
+                  "&.active": { color: "primary.main", bgcolor: "rgba(198,165,92,0.08)" },
+                  "&:hover": { color: "primary.main", bgcolor: "rgba(198,165,92,0.05)" },
+                }}>
                 {cat.label}
               </Button>
             ))}
@@ -93,27 +76,14 @@ const NavBar = () => {
             <PetsIcon sx={{ color: "primary.main" }} />
             <Typography fontWeight={700} fontSize="0.95rem" letterSpacing={1}>HOUSE OF PRINIE</Typography>
           </Box>
-          <IconButton onClick={() => setDrawerOpen(false)} sx={{ color: "text.secondary" }}>
-            <CloseIcon />
-          </IconButton>
+          <IconButton onClick={() => setDrawerOpen(false)} sx={{ color: "text.secondary" }}><CloseIcon /></IconButton>
         </Box>
         <Divider sx={{ borderColor: "rgba(198,165,92,0.1)" }} />
         <List sx={{ px: 1, pt: 1 }}>
           {categories.map(cat => (
             <ListItem key={cat.path} disablePadding>
-              <ListItemButton
-                component={Link}
-                to={cat.path}
-                selected={pathname === cat.path}
-                sx={{
-                  borderRadius: 2,
-                  mb: 0.25,
-                  "&.Mui-selected": {
-                    bgcolor: "rgba(198,165,92,0.1)",
-                    "& .MuiListItemText-primary": { color: "primary.main" },
-                  },
-                }}
-              >
+              <ListItemButton component={Link} to={cat.path} selected={pathname === cat.path}
+                sx={{ borderRadius: 2, mb: 0.25, "&.Mui-selected": { bgcolor: "rgba(198,165,92,0.1)", "& .MuiListItemText-primary": { color: "primary.main" } } }}>
                 <ListItemText primary={cat.label} primaryTypographyProps={{ fontWeight: 500, letterSpacing: "0.5px", fontSize: "0.9rem" }} />
               </ListItemButton>
             </ListItem>

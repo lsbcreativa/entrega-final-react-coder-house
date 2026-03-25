@@ -13,167 +13,166 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
-// All images from Pexels CDN (reliable, no hotlink blocking)
 const P = "https://images.pexels.com/photos"
 const Q = "?auto=compress&cs=tinysrgb&w=600"
 
 const products = [
-  // ALIMENTOS (Food)
+  // ALIMENTOS
   {
-    name: "Premium Adult Dog Food 15kg",
-    price: 54.99,
+    name: "Alimento Premium Perro Adulto 15kg",
+    price: 199.90,
     category: "alimentos",
-    description: "Balanced premium food with high-quality proteins, essential vitamins and minerals to keep your dog healthy and energetic. Formula with omega 3 and 6 for a shiny coat.",
+    description: "Alimento balanceado premium con proteínas de alta calidad, vitaminas y minerales esenciales para mantener a tu perro saludable y lleno de energía. Fórmula con omega 3 y 6 para un pelaje brillante.",
     img: `${P}/6568501/pexels-photo-6568501.jpeg${Q}`,
     stock: 25
   },
   {
-    name: "Indoor Cat Formula 7.5kg",
-    price: 39.99,
+    name: "Alimento Gato Indoor 7.5kg",
+    price: 149.90,
     category: "alimentos",
-    description: "Specially designed formula for indoor cats with weight control and hairball prevention. Enriched with taurine and L-carnitine for a healthy life.",
+    description: "Fórmula especialmente diseñada para gatos de interior con control de peso y bolas de pelo. Enriquecido con taurina y L-carnitina para una vida saludable.",
     img: `${P}/5731866/pexels-photo-5731866.jpeg${Q}`,
     stock: 18
   },
   {
-    name: "Dental Treats for Dogs x12",
-    price: 12.99,
+    name: "Snacks Dentales para Perro x12",
+    price: 47.90,
     category: "alimentos",
-    description: "Dental treats that help reduce tartar and maintain healthy gums. Special texture that cleans teeth while your pet enjoys them.",
+    description: "Premios dentales que ayudan a reducir el sarro y mantener encías saludables. Textura especial que limpia los dientes mientras tu mascota los disfruta.",
     img: `${P}/5731870/pexels-photo-5731870.jpeg${Q}`,
     stock: 40
   },
   {
-    name: "Puppy Small Breed Food 3kg",
-    price: 24.99,
+    name: "Alimento Cachorro Raza Pequeña 3kg",
+    price: 89.90,
     category: "alimentos",
-    description: "Complete nutrition for small breed puppies with DHA for brain development and adapted kibble size. Rich in calcium and phosphorus for strong bones.",
+    description: "Nutrición completa para cachorros de raza pequeña con DHA para desarrollo cerebral y croquetas de tamaño adaptado. Rico en calcio y fósforo para huesos fuertes.",
     img: `${P}/6957667/pexels-photo-6957667.jpeg${Q}`,
     stock: 15
   },
 
-  // JUGUETES (Toys)
+  // JUGUETES
   {
-    name: "Interactive Sound Ball",
-    price: 8.99,
+    name: "Pelota Interactiva con Sonido",
+    price: 32.90,
     category: "juguetes",
-    description: "Durable rubber ball with built-in sound that stimulates active play. Non-toxic material, ideal for dogs of all sizes. Floats in water.",
+    description: "Pelota de goma resistente con sonido incluido que estimula el juego activo. Material no tóxico, ideal para perros de todos los tamaños. Flota en agua.",
     img: `${P}/5255590/pexels-photo-5255590.jpeg${Q}`,
     stock: 30
   },
   {
-    name: "Catnip Plush Mouse",
-    price: 5.99,
+    name: "Ratón de Peluche con Catnip",
+    price: 21.90,
     category: "juguetes",
-    description: "Plush mouse toy filled with premium organic catnip. Awakens your cat's hunting instinct and keeps them entertained for hours.",
+    description: "Juguete de peluche en forma de ratón relleno con catnip orgánico premium. Despierta el instinto cazador de tu gato y lo mantiene entretenido por horas.",
     img: `${P}/7210754/pexels-photo-7210754.jpeg${Q}`,
     stock: 50
   },
   {
-    name: "Kong Classic Fillable Large",
-    price: 18.99,
+    name: "Kong Classic Rellenable Grande",
+    price: 69.90,
     category: "juguetes",
-    description: "Ultra-durable rubber toy that can be filled with treats or paste. Ideal for dogs that love to chew. Bounces unpredictably for more fun.",
+    description: "Juguete de goma ultra resistente que se puede rellenar con premios o pasta. Ideal para perros que les gusta masticar. Rebota de forma impredecible.",
     img: `${P}/4587998/pexels-photo-4587998.jpeg${Q}`,
     stock: 20
   },
   {
-    name: "Foldable Cat Tunnel",
-    price: 11.99,
+    name: "Túnel Plegable para Gatos",
+    price: 44.90,
     category: "juguetes",
-    description: "Foldable play tunnel with crinkly material that attracts feline curiosity. Easy to store and transport. Includes hanging ball at entrance.",
+    description: "Túnel de juego plegable con material crujiente que atrae la curiosidad felina. Fácil de guardar y transportar. Incluye pelota colgante en la entrada.",
     img: `${P}/4588065/pexels-photo-4588065.jpeg${Q}`,
     stock: 12
   },
 
-  // ACCESORIOS (Accessories)
+  // ACCESORIOS
   {
-    name: "Orthopedic Dog Bed Large",
-    price: 45.99,
+    name: "Cama Ortopédica para Perro Grande",
+    price: 169.90,
     category: "accesorios",
-    description: "Bed with memory foam filling that adapts to your pet's body. Washable and non-slip cover. Ideal for senior dogs or those with joint problems.",
+    description: "Cama con relleno de espuma viscoelástica que se adapta al cuerpo de tu mascota. Funda lavable y antideslizante. Ideal para perros senior o con problemas articulares.",
     img: `${P}/4587979/pexels-photo-4587979.jpeg${Q}`,
     stock: 8
   },
   {
-    name: "LED Adjustable Collar",
-    price: 7.99,
+    name: "Collar Ajustable con LED",
+    price: 29.90,
     category: "accesorios",
-    description: "USB rechargeable LED collar with 3 lighting modes. Perfect for night walks, keeps your pet visible and safe. Water resistant.",
+    description: "Collar con luz LED recargable por USB con 3 modos de iluminación. Perfecto para paseos nocturnos, mantiene a tu mascota visible y segura. Resistente al agua.",
     img: `${P}/5731861/pexels-photo-5731861.jpeg${Q}`,
     stock: 35
   },
   {
-    name: "Medium Rigid Carrier",
-    price: 32.99,
+    name: "Transportadora Rígida Mediana",
+    price: 119.90,
     category: "accesorios",
-    description: "Airline-approved carrier with top and side ventilation. Double-lock security door. Includes travel water bowl.",
+    description: "Transportadora aprobada por aerolíneas con ventilación superior y lateral. Puerta de seguridad con doble cierre. Incluye bebedero de viaje.",
     img: `${P}/4588047/pexels-photo-4588047.jpeg${Q}`,
     stock: 10
   },
   {
-    name: "Cat Tower Scratcher 120cm",
-    price: 38.99,
+    name: "Rascador Torre para Gatos 120cm",
+    price: 144.90,
     category: "accesorios",
-    description: "Multi-level scratching tower with platforms, caves and natural sisal posts. Stable and wide base. Your cat's favorite place to play and rest.",
+    description: "Torre rascador de múltiples niveles con plataformas, cuevas y postes de sisal natural. Base estable y amplia. El lugar favorito de tu gato para jugar y descansar.",
     img: `${P}/6001387/pexels-photo-6001387.jpeg${Q}`,
     stock: 6
   },
 
-  // HIGIENE (Grooming)
+  // HIGIENE
   {
-    name: "Hypoallergenic Shampoo 500ml",
-    price: 9.99,
+    name: "Shampoo Hipoalergénico 500ml",
+    price: 36.90,
     category: "higiene",
-    description: "Gentle shampoo with aloe vera and colloidal oatmeal for sensitive skin. Paraben and sulfate free. Leaves coat soft, shiny with lasting fresh scent.",
+    description: "Shampoo suave con aloe vera y avena coloidal para pieles sensibles. Sin parabenos ni sulfatos. Deja el pelaje suave, brillante y con aroma fresco duradero.",
     img: `${P}/5731874/pexels-photo-5731874.jpeg${Q}`,
     stock: 22
   },
   {
-    name: "Brushes & Combs Kit x4",
-    price: 12.99,
+    name: "Kit de Cepillos y Peines x4",
+    price: 47.90,
     category: "higiene",
-    description: "Complete grooming set with detangling brush, flea comb, soft bristle brush and massage glove. For all coat types.",
+    description: "Set completo de grooming con cepillo desenredante, peine de pulgas, cepillo de cerdas suaves y guante masajeador. Para todo tipo de pelaje.",
     img: `${P}/6001397/pexels-photo-6001397.jpeg${Q}`,
     stock: 28
   },
   {
-    name: "Professional Nail Clipper",
-    price: 6.99,
+    name: "Cortaúñas Profesional con Lima",
+    price: 25.90,
     category: "higiene",
-    description: "Stainless steel nail clipper with ergonomic non-slip handle and safety guard. Includes file for smooth finish. Suitable for dogs and cats.",
+    description: "Cortaúñas de acero inoxidable con mango ergonómico antideslizante y protector de seguridad. Incluye lima para acabado suave. Apto para perros y gatos.",
     img: `${P}/1254140/pexels-photo-1254140.jpeg${Q}`,
     stock: 0
   },
   {
-    name: "Deodorizing Wet Wipes x80",
-    price: 7.99,
+    name: "Toallitas Húmedas Desodorizantes x80",
+    price: 29.90,
     category: "higiene",
-    description: "Extra thick wipes with deodorizing formula and vitamin E. Ideal for cleaning paws, coat and ears between baths. Biodegradable and alcohol-free.",
+    description: "Toallitas extra gruesas con fórmula desodorizante y vitamina E. Ideales para limpiar patas, pelaje y oídos entre baños. Biodegradables y sin alcohol.",
     img: `${P}/4588047/pexels-photo-4588047.jpeg${Q}`,
     stock: 45
   }
 ]
 
 async function seedProducts() {
-  console.log("🗑️  Removing previous products...")
+  console.log("🗑️  Eliminando productos anteriores...")
   const productsRef = collection(db, "products")
   const snapshot = await getDocs(productsRef)
   for (const docSnap of snapshot.docs) {
     await deleteDoc(doc(db, "products", docSnap.id))
   }
 
-  console.log(`\n🐾 Uploading ${products.length} products...`)
+  console.log(`\n🐾 Subiendo ${products.length} productos (Soles)...`)
   for (const product of products) {
     try {
       const docRef = await addDoc(productsRef, product)
-      console.log(`✅ ${product.name} — $${product.price} → ${docRef.id}`)
+      console.log(`✅ ${product.name} — S/ ${product.price} → ${docRef.id}`)
     } catch (error) {
       console.error(`❌ Error: ${product.name}:`, error)
     }
   }
 
-  console.log("\n🎉 Done!")
+  console.log("\n🎉 ¡Listo!")
   process.exit(0)
 }
 

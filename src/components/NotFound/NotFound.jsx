@@ -11,18 +11,10 @@ const NotFound = () => {
     <Container maxWidth="sm">
       <Box sx={{ textAlign: "center", py: 14 }}>
         <PetsIcon sx={{ fontSize: 56, color: "primary.main", opacity: 0.3, mb: 1 }} />
-        <Typography sx={{ fontSize: { xs: "5rem", md: "8rem" }, fontWeight: 900, color: "primary.main", lineHeight: 1, opacity: 0.1, letterSpacing: -3 }}>
-          404
-        </Typography>
-        <Typography variant="h5" fontWeight={700} gutterBottom sx={{ mt: -1 }}>
-          Page Not Found
-        </Typography>
-        <Typography color="text.secondary" sx={{ mb: 4, maxWidth: 360, mx: "auto" }}>
-          This page seems to have wandered off like a curious puppy.
-        </Typography>
-        <Button variant="contained" color="primary" component={Link} to="/" startIcon={<HomeIcon />} size="large">
-          Back to Home
-        </Button>
+        <Typography sx={{ fontSize: { xs: "5rem", md: "8rem" }, fontWeight: 900, color: "primary.main", lineHeight: 1, opacity: 0.1, letterSpacing: -3 }}>404</Typography>
+        <Typography variant="h5" fontWeight={700} gutterBottom sx={{ mt: -1 }}>Página no encontrada</Typography>
+        <Typography color="text.secondary" sx={{ mb: 4, maxWidth: 360, mx: "auto" }}>Parece que esta página se escapó como un cachorro travieso.</Typography>
+        <Button variant="contained" color="primary" component={Link} to="/" startIcon={<HomeIcon />} size="large">Volver al inicio</Button>
       </Box>
     </Container>
   )

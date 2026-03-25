@@ -58,19 +58,19 @@ function App() {
                         HOUSE OF PRINIE
                       </Typography>
                       <Typography variant="caption" sx={{ color: gold, letterSpacing: 2, fontSize: "0.55rem", fontWeight: 600 }}>
-                        LUXURY PET BOUTIQUE
+                        BOUTIQUE PREMIUM PARA MASCOTAS
                       </Typography>
                     </Box>
                   </Box>
                   <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.3)", lineHeight: 1.8, maxWidth: 340 }}>
-                    Curated premium products for your beloved companion. Because they deserve nothing but the finest.
+                    Productos premium seleccionados para tu compañero. Porque se merece lo mejor.
                   </Typography>
                 </Grid>
                 <Grid size={{ xs: 6, md: 3 }}>
                   <Typography variant="overline" sx={{ color: gold, fontWeight: 700, letterSpacing: 3, fontSize: "0.6rem" }}>
-                    Collections
+                    Categorías
                   </Typography>
-                  {["Food", "Toys", "Accessories", "Grooming"].map(cat => (
+                  {["Alimentos", "Juguetes", "Accesorios", "Higiene"].map(cat => (
                     <Typography key={cat} variant="body2" sx={{ color: "rgba(255,255,255,0.3)", mt: 1, fontSize: "0.85rem", cursor: "default", transition: "0.3s", "&:hover": { color: gold } }}>
                       {cat}
                     </Typography>
@@ -78,12 +78,12 @@ function App() {
                 </Grid>
                 <Grid size={{ xs: 6, md: 4 }}>
                   <Typography variant="overline" sx={{ color: gold, fontWeight: 700, letterSpacing: 3, fontSize: "0.6rem" }}>
-                    Contact
+                    Contacto
                   </Typography>
                   {[
-                    { icon: <PlaceIcon sx={{ fontSize: 14 }} />, text: "Buenos Aires, Argentina" },
-                    { icon: <PhoneIcon sx={{ fontSize: 14 }} />, text: "+54 11 1234-5678" },
-                    { icon: <EmailIcon sx={{ fontSize: 14 }} />, text: "hello@houseofprinie.com" },
+                    { icon: <PlaceIcon sx={{ fontSize: 14 }} />, text: "Lima, Perú" },
+                    { icon: <PhoneIcon sx={{ fontSize: 14 }} />, text: "+51 987 654 321" },
+                    { icon: <EmailIcon sx={{ fontSize: 14 }} />, text: "hola@houseofprinie.com" },
                   ].map((item, i) => (
                     <Box key={i} sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1 }}>
                       <Box sx={{ color: "rgba(198,165,92,0.4)" }}>{item.icon}</Box>
@@ -95,7 +95,7 @@ function App() {
               <Divider sx={{ borderColor: "rgba(255,255,255,0.03)" }} />
               <Box sx={{ py: 2.5, textAlign: "center" }}>
                 <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.15)", letterSpacing: 1 }}>
-                  © 2026 House of Prinie. All rights reserved.
+                  © 2026 House of Prinie. Todos los derechos reservados.
                 </Typography>
               </Box>
             </Container>
