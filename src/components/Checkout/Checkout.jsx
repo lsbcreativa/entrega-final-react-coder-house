@@ -39,7 +39,7 @@ const Checkout = () => {
       }
       const docRef = await addDoc(collection(db, "orders"), order)
       setOrderId(docRef.id); clear()
-    } catch (error) { console.error("Error:", error); alert("Error al crear la orden. Intentá nuevamente.") }
+    } catch (error) { console.error("Error:", error); alert("Error al crear la orden. Intenta nuevamente.") }
     finally { setLoading(false) }
   }
 
@@ -57,7 +57,7 @@ const Checkout = () => {
             <Typography variant="caption" color="text.secondary">ID de tu orden:</Typography>
             <Typography variant="body1" fontWeight={700} sx={{ fontFamily: "monospace", letterSpacing: 0.5, wordBreak: "break-all", color: "primary.main" }}>{orderId}</Typography>
           </Paper>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>Guardá este ID para hacer seguimiento de tu pedido</Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>Guarda este ID para hacer seguimiento de tu pedido</Typography>
           <Button variant="contained" color="primary" component={Link} to="/" startIcon={<HomeIcon />} size="large">Volver al inicio</Button>
         </Paper>
       </Container>
@@ -77,7 +77,7 @@ const Checkout = () => {
               <TextField label="Nombre completo" name="name" placeholder="Ej: Juan Pérez" value={formData.name} onChange={handleChange} required fullWidth />
               <TextField label="Teléfono" name="phone" type="tel" placeholder="Ej: 987 654 321" value={formData.phone} onChange={handleChange} required fullWidth />
               <TextField label="Email" name="email" type="email" placeholder="tucorreo@email.com" value={formData.email} onChange={handleChange} required fullWidth />
-              <TextField label="Confirmar email" name="emailConfirm" type="email" placeholder="Repetí tu email" value={formData.emailConfirm} onChange={handleChange} required fullWidth />
+              <TextField label="Confirmar email" name="emailConfirm" type="email" placeholder="Repite tu email" value={formData.emailConfirm} onChange={handleChange} required fullWidth />
               <Button type="submit" variant="contained" color="primary" size="large" disabled={loading} sx={{ py: 1.5, mt: 1, fontSize: "1rem" }}>
                 {loading ? "Procesando..." : "Confirmar compra"}
               </Button>

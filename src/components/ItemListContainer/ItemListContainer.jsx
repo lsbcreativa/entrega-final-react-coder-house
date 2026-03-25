@@ -13,6 +13,9 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined"
 import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined"
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined"
+import { Suspense, lazy } from "react"
+
+const HeroScene = lazy(() => import("../HeroScene/HeroScene"))
 
 const gold = "#C6A55C"
 
@@ -53,7 +56,7 @@ const ItemListContainer = () => {
               Bienvenido a{" "}<Box component="span" sx={{ color: gold }}>House of Prinie</Box>
             </Typography>
             <Typography sx={{ color: "rgba(255,255,255,0.4)", fontSize: { xs: "0.95rem", md: "1.1rem" }, lineHeight: 1.8, mb: 4, maxWidth: 500 }}>
-              Descubrí nuestra colección exclusiva de productos premium para tu mascota. Alimentos de primera calidad, juguetes innovadores, accesorios de diseño y productos de higiene profesional. Porque tu compañero merece lo mejor.
+              Descubre nuestra colección exclusiva de productos premium para tu mascota. Alimentos de primera calidad, juguetes innovadores, accesorios de diseño y productos de higiene profesional. Porque tu compañero merece lo mejor.
             </Typography>
             <Box sx={{ display: "flex", gap: 1.5, flexWrap: "wrap" }}>
               {[
@@ -66,9 +69,9 @@ const ItemListContainer = () => {
               ))}
             </Box>
           </Box>
-          <Box sx={{ display: { xs: "none", lg: "flex" }, position: "absolute", right: 80, alignItems: "center", justifyContent: "center" }}>
-            <PetsIcon sx={{ fontSize: 180, color: "rgba(198,165,92,0.04)" }} />
-          </Box>
+          <Suspense fallback={null}>
+            <HeroScene />
+          </Suspense>
         </Box>
       )}
 
@@ -81,8 +84,8 @@ const ItemListContainer = () => {
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mt: 1, maxWidth: 600, mx: "auto" }}>
           {categoryId
-            ? categoryDescriptions[categoryId] || `Explorá nuestra selección de ${categoryNames[categoryId]?.toLowerCase()}`
-            : "Explorá nuestro catálogo completo de productos seleccionados para el bienestar de tu mascota."
+            ? categoryDescriptions[categoryId] || `Explora nuestra selección de ${categoryNames[categoryId]?.toLowerCase()}`
+            : "Explora nuestro catálogo completo de productos seleccionados para el bienestar de tu mascota."
           }
         </Typography>
       </Box>

@@ -27,7 +27,7 @@ const Cart = () => {
         <Box sx={{ textAlign: "center", py: 14 }}>
           <ShoppingBagOutlinedIcon sx={{ fontSize: 80, color: "primary.main", opacity: 0.2, mb: 2 }} />
           <Typography variant="h5" fontWeight={700} gutterBottom>Tu carrito está vacío</Typography>
-          <Typography color="text.secondary" sx={{ mb: 4, maxWidth: 400, mx: "auto" }}>¡Explorá nuestros productos y encontrá lo mejor para tu mascota!</Typography>
+          <Typography color="text.secondary" sx={{ mb: 4, maxWidth: 400, mx: "auto" }}>¡Explora nuestros productos y encuentra lo mejor para tu mascota!</Typography>
           <Button variant="contained" color="primary" component={Link} to="/" size="large" endIcon={<ArrowForwardIcon />}>Ver productos</Button>
         </Box>
       </Container>
