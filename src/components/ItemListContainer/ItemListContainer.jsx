@@ -14,6 +14,7 @@ import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined"
 import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined"
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined"
 import { Suspense, lazy } from "react"
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
 
 const HeroScene = lazy(() => import("../HeroScene/HeroScene"))
 
@@ -69,9 +70,11 @@ const ItemListContainer = () => {
               ))}
             </Box>
           </Box>
-          <Suspense fallback={null}>
-            <HeroScene />
-          </Suspense>
+          <ErrorBoundary fallback={null}>
+            <Suspense fallback={null}>
+              <HeroScene />
+            </Suspense>
+          </ErrorBoundary>
         </Box>
       )}
 
